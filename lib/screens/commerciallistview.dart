@@ -98,31 +98,52 @@ class CommercialListViewScreen extends StatelessWidget {
                         SliverList(
                           delegate: SliverChildBuilderDelegate(
                                 (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(top: 10.0),
-                                child: CommCard(
-                                  id: snapshot.data[index]['id'],
-                                  image: Image.network(
-                                    snapshot.data[index]['img_1'] == ''
-                                        ? '$appServerURL/sample.jpg'
-                                        : '$appServerURL/${snapshot.data[index]['img_1']}',
-                                    fit: BoxFit.cover,
+                              if(snapshot.data[index]['img_1'] == '')
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: CommCard(
+                                    id: snapshot.data[index]['id'],
+                                    image: Image.asset('image/smile.jpg',
+                                      fit: BoxFit.cover,
+                                    ),
+                                    division: snapshot.data[index]['division'],
+                                    price: snapshot.data[index]['price'],
+                                    price2: snapshot.data[index]['price2'] ?? 0,
+                                    eliv: snapshot.data[index]['eliv'] ?? '',
+                                    parking : snapshot.data[index]['parking'] ?? '',
+                                    size: snapshot.data[index]['size'] ?? 0,
+                                    entitleprice: snapshot.data[index]['entitleprice'] ?? 0,
+                                    indate: snapshot.data[index]['indate'] ?? '',
+                                    floor: snapshot.data[index]['floor'] ?? '',
+                                    type: snapshot.data[index]['type'] ?? '',
+                                    addr: snapshot.data[index]['addr'] ?? '',
+                                    callname: snapshot.data[index]['sub_addr'] ?? '',
+                                    naver_no: snapshot.data[index]['naver_no'] ?? '',
                                   ),
-                                  division: snapshot.data[index]['division'],
-                                  price: snapshot.data[index]['price'],
-                                  price2: snapshot.data[index]['price2'] ?? 0,
-                                  eliv: snapshot.data[index]['eliv'] ?? '',
-                                  parking : snapshot.data[index]['parking'] ?? '',
-                                  size: snapshot.data[index]['size'] ?? 0,
-                                  entitleprice: snapshot.data[index]['entitleprice'] ?? 0,
-                                  indate: snapshot.data[index]['indate'] ?? '',
-                                  floor: snapshot.data[index]['floor'] ?? '',
-                                  type: snapshot.data[index]['type'] ?? '',
-                                  addr: snapshot.data[index]['addr'] ?? '',
-                                  callname: snapshot.data[index]['sub_addr'] ?? '',
-                                  naver_no: snapshot.data[index]['naver_no'] ?? '',
-                                ),
-                              );
+                                );
+                              else
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: CommCard(
+                                    id: snapshot.data[index]['id'],
+                                    image: Image.network('$appServerURL/${snapshot.data[index]['img_1']}',
+                                      fit: BoxFit.cover,
+                                    ),
+                                    division: snapshot.data[index]['division'],
+                                    price: snapshot.data[index]['price'],
+                                    price2: snapshot.data[index]['price2'] ?? 0,
+                                    eliv: snapshot.data[index]['eliv'] ?? '',
+                                    parking : snapshot.data[index]['parking'] ?? '',
+                                    size: snapshot.data[index]['size'] ?? 0,
+                                    entitleprice: snapshot.data[index]['entitleprice'] ?? 0,
+                                    indate: snapshot.data[index]['indate'] ?? '',
+                                    floor: snapshot.data[index]['floor'] ?? '',
+                                    type: snapshot.data[index]['type'] ?? '',
+                                    addr: snapshot.data[index]['addr'] ?? '',
+                                    callname: snapshot.data[index]['sub_addr'] ?? '',
+                                    naver_no: snapshot.data[index]['naver_no'] ?? '',
+                                  ),
+                                );
                             },
                             childCount: snapshot.data.length,
                           ),

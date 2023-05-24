@@ -248,8 +248,6 @@ class _AssetDetailViewScreenState extends State<AssetDetailViewScreen> {
 
 
 
-
-
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
@@ -443,68 +441,111 @@ class _AssetDetailViewScreenState extends State<AssetDetailViewScreen> {
                             child: PageView(
                                     controller: _controller,
                                     children: [
+                                      if(snapshot.data[0]['img1'] != '')
                                         ClipRRect(
-                                          child: Image.network(
-                                            snapshot.data[0]['img1'] == ''
-                                                ? '$appServerURL/sample.jpg'
-                                                : '$appServerURL/${snapshot.data[0]['img1']}',
+                                          child: Image.network('$appServerURL/${snapshot.data[0]['img1']}',
                                             fit: BoxFit.fitHeight,
                                           ),
                                         ),
-                                      ClipRRect(
-                                        child: Image.network(
-                                          snapshot.data[0]['img2'] == ''
-                                              ? '$appServerURL/sample.jpg'
-                                              : '$appServerURL/${snapshot.data[0]['img2']}',
-                                          fit: BoxFit.fitHeight,
+                                      if(snapshot.data[0]['img1'] == '')
+                                        ClipRRect(
+                                          child: Image.asset('image/smile.jpg',
+                                            fit: BoxFit.fitHeight,
+                                          ),
                                         ),
-                                      ),
+                                      if(snapshot.data[0]['img2'] != '')
+                                        ClipRRect(
+                                          child: Image.network('$appServerURL/${snapshot.data[0]['img2']}',
+                                            fit: BoxFit.fitHeight,
+                                          ),
+                                        ),
+                                      if(snapshot.data[0]['img2'] == '')
+                                        ClipRRect(
+                                          child: Image.asset('image/smile.jpg',
+                                            fit: BoxFit.fitHeight,
+                                          ),
+                                        ),
                                       if(snapshot.data[0]['img3'] != '')
                                         ClipRRect(
-                                          child: Image.network(
-                                            '$appServerURL/${snapshot.data[0]['img3']}',
+                                          child: Image.network('$appServerURL/${snapshot.data[0]['img3']}',
+                                            fit: BoxFit.fitHeight,
+                                          ),
+                                        ),
+                                      if(snapshot.data[0]['img3'] == '')
+                                        ClipRRect(
+                                          child: Image.asset('image/smile.jpg',
                                             fit: BoxFit.fitHeight,
                                           ),
                                         ),
                                       if(snapshot.data[0]['img4'] != '')
                                         ClipRRect(
-                                          child: Image.network(
-                                            '$appServerURL/${snapshot.data[0]['img4']}',
+                                          child: Image.network('$appServerURL/${snapshot.data[0]['img4']}',
+                                            fit: BoxFit.fitHeight,
+                                          ),
+                                        ),
+                                      if(snapshot.data[0]['img4'] == '')
+                                        ClipRRect(
+                                          child: Image.asset('image/smile.jpg',
                                             fit: BoxFit.fitHeight,
                                           ),
                                         ),
                                       if(snapshot.data[0]['img5'] != '')
                                         ClipRRect(
-                                          child: Image.network(
-                                            '$appServerURL/${snapshot.data[0]['img5']}',
+                                          child: Image.network('$appServerURL/${snapshot.data[0]['img5']}',
+                                            fit: BoxFit.fitHeight,
+                                          ),
+                                        ),
+                                      if(snapshot.data[0]['img5'] == '')
+                                        ClipRRect(
+                                          child: Image.asset('image/smile.jpg',
                                             fit: BoxFit.fitHeight,
                                           ),
                                         ),
                                       if(snapshot.data[0]['img6'] != '')
                                         ClipRRect(
-                                          child: Image.network(
-                                            '$appServerURL/${snapshot.data[0]['img6']}',
+                                          child: Image.network('$appServerURL/${snapshot.data[0]['img6']}',
+                                            fit: BoxFit.fitHeight,
+                                          ),
+                                        ),
+                                      if(snapshot.data[0]['img6'] == '')
+                                        ClipRRect(
+                                          child: Image.asset('image/smile.jpg',
                                             fit: BoxFit.fitHeight,
                                           ),
                                         ),
                                       if(snapshot.data[0]['img7'] != '')
                                         ClipRRect(
-                                          child: Image.network(
-                                            '$appServerURL/${snapshot.data[0]['img7']}',
+                                          child: Image.network('$appServerURL/${snapshot.data[0]['img7']}',
+                                            fit: BoxFit.fitHeight,
+                                          ),
+                                        ),
+                                      if(snapshot.data[0]['img7'] == '')
+                                        ClipRRect(
+                                          child: Image.asset('image/smile.jpg',
                                             fit: BoxFit.fitHeight,
                                           ),
                                         ),
                                       if(snapshot.data[0]['img8'] != '')
                                         ClipRRect(
-                                          child: Image.network(
-                                            '$appServerURL/${snapshot.data[0]['img8']}',
+                                          child: Image.network('$appServerURL/${snapshot.data[0]['img8']}',
+                                            fit: BoxFit.fitHeight,
+                                          ),
+                                        ),
+                                      if(snapshot.data[0]['img8'] == '')
+                                        ClipRRect(
+                                          child: Image.asset('image/smile.jpg',
                                             fit: BoxFit.fitHeight,
                                           ),
                                         ),
                                       if(snapshot.data[0]['img9'] != '')
                                         ClipRRect(
-                                          child: Image.network(
-                                            '$appServerURL/${snapshot.data[0]['img9']}',
+                                          child: Image.network('$appServerURL/${snapshot.data[0]['img9']}',
+                                            fit: BoxFit.fitHeight,
+                                          ),
+                                        ),
+                                      if(snapshot.data[0]['img9'] == '')
+                                        ClipRRect(
+                                          child: Image.asset('image/smile.jpg',
                                             fit: BoxFit.fitHeight,
                                           ),
                                         ),
@@ -541,10 +582,8 @@ class _AssetDetailViewScreenState extends State<AssetDetailViewScreen> {
                                       ? BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     color: Theme.of(context).colorScheme.primaryContainer,
-                                    image: DecorationImage(
-                                      image: _imgList[index] == '' ? NetworkImage('$appServerURL/sample.jpg',) :  NetworkImage('$appServerURL/${_imgList[index]}',),
-                                      fit: BoxFit.fitHeight,
-                                    ),
+                                    image: _imgList[index] == '' ? DecorationImage(image: AssetImage('image/smile.jpg',), fit: BoxFit.fitHeight,)
+                                        : DecorationImage(image: NetworkImage('$appServerURL/${_imgList[index]}'), fit: BoxFit.fitHeight,),
                                   ) : null,
                                   child : Center(child: _boxContents[index]),
 
@@ -811,10 +850,8 @@ class _AssetDetailViewScreenState extends State<AssetDetailViewScreen> {
                                         ? BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       color: Theme.of(context).colorScheme.primaryContainer,
-                                      image: DecorationImage(
-                                        image: _imgList[index] == '' ? NetworkImage('$appServerURL/sample.jpg',) :  NetworkImage('$appServerURL/${_imgList[index]}',),
-                                        fit: BoxFit.fitHeight,
-                                      ),
+                                      image: _imgList[index] == '' ? DecorationImage(image: AssetImage('image/smile.jpg',), fit: BoxFit.fitHeight,)
+                                          : DecorationImage(image: NetworkImage('$appServerURL/${_imgList[index]}'), fit: BoxFit.fitHeight,),
                                     ) : null,
                                     child : Center(child: _boxContents[index]),
 
