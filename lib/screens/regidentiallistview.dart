@@ -108,32 +108,54 @@ class RegidentialListViewScreen extends StatelessWidget {
                         SliverList(
                           delegate: SliverChildBuilderDelegate(
                                 (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(top: 10.0),
-                                child: AssetCard(
-                                  id: snapshot.data[index]['id'],
-                                  image: Image.network(
-                                    snapshot.data[index]['img1'] == ''
-                                        ? '$appServerURL/sample.jpg'
-                                        : '$appServerURL/${snapshot.data[index]['img1']}',
-                                    fit: BoxFit.cover,
+                              if(snapshot.data[index]['img1'] == '')
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: AssetCard(
+                                    id: snapshot.data[index]['id'],
+                                    image: Image.asset('image/smile.jpg',
+                                      fit: BoxFit.cover,
+                                    ),
+                                    callname: snapshot.data[index]['callname'],
+                                    price: snapshot.data[index]['price'],
+                                    price2: snapshot.data[index]['price2'] ?? 0,
+                                    room: snapshot.data[index]['room'] ?? 0,
+                                    bath: snapshot.data[index]['bath'] ?? 0,
+                                    size: snapshot.data[index]['size'].round() ?? 0,
+                                    direction: snapshot.data[index]['direction'],
+                                    indate: snapshot.data[index]['indate'],
+                                    floor: snapshot.data[index]['floor'] ?? 0,
+                                    totalfloor: snapshot.data[index]['totalfloor'] ?? 0,
+                                    type: snapshot.data[index]['type'] ?? '',
+                                    gubun: controller.selectGubun.value,
+                                    addr: snapshot.data[index]['addr'],
+                                    naver_no: snapshot.data[index]['naver_no'],
                                   ),
-                                  callname: snapshot.data[index]['callname'],
-                                  price: snapshot.data[index]['price'],
-                                  price2: snapshot.data[index]['price2'] ?? 0,
-                                  room: snapshot.data[index]['room'] ?? 0,
-                                  bath: snapshot.data[index]['bath'] ?? 0,
-                                  size: snapshot.data[index]['size'].round() ?? 0,
-                                  direction: snapshot.data[index]['direction'],
-                                  indate: snapshot.data[index]['indate'],
-                                  floor: snapshot.data[index]['floor'] ?? 0,
-                                  totalfloor: snapshot.data[index]['totalfloor'] ?? 0,
-                                  type: snapshot.data[index]['type'] ?? '',
-                                  gubun: controller.selectGubun.value,
-                                  addr: snapshot.data[index]['addr'],
-                                  naver_no: snapshot.data[index]['naver_no'],
-                                ),
-                              );
+                                );
+                              else
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: AssetCard(
+                                    id: snapshot.data[index]['id'],
+                                    image: Image.network('$appServerURL/${snapshot.data[index]['img1']}',
+                                      fit: BoxFit.cover,
+                                    ),
+                                    callname: snapshot.data[index]['callname'],
+                                    price: snapshot.data[index]['price'],
+                                    price2: snapshot.data[index]['price2'] ?? 0,
+                                    room: snapshot.data[index]['room'] ?? 0,
+                                    bath: snapshot.data[index]['bath'] ?? 0,
+                                    size: snapshot.data[index]['size'].round() ?? 0,
+                                    direction: snapshot.data[index]['direction'],
+                                    indate: snapshot.data[index]['indate'],
+                                    floor: snapshot.data[index]['floor'] ?? 0,
+                                    totalfloor: snapshot.data[index]['totalfloor'] ?? 0,
+                                    type: snapshot.data[index]['type'] ?? '',
+                                    gubun: controller.selectGubun.value,
+                                    addr: snapshot.data[index]['addr'],
+                                    naver_no: snapshot.data[index]['naver_no'],
+                                  ),
+                                );
                             },
                             childCount: snapshot.data.length,
                           ),

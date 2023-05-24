@@ -226,16 +226,22 @@ class _MapScreenState extends State<MapScreen> {
                                     padding: const EdgeInsets.all(4),
                                     child: Row(
                                       children: [
-                                        Container(
-                                          width: 88,
-                                          height: 88,
-                                          child: Image.network(
-                                            _result[index]['${_type2 == 'C' ? "img_1" : "img1"}'] == ''
-                                                ? '$appServerURL/sample.jpg'
-                                                : '$appServerURL/${_result[index]['${_type2 == 'C' ? "img_1" : "img1"}']}',
-                                            fit: BoxFit.cover,
+                                        if(_result[index]['${_type2 == 'C' ? "img_1" : "img1"}'] == '')
+                                          Container(
+                                            width: 88,
+                                            height: 88,
+                                            child: Image.asset('image/smile.jpg',
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
-                                        ),
+                                        if(_result[index]['${_type2 == 'C' ? "img_1" : "img1"}'] != '')
+                                          Container(
+                                            width: 88,
+                                            height: 88,
+                                            child: Image.network('$appServerURL/${_result[index]['${_type2 == 'C' ? "img_1" : "img1"}']}',
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
                                         SizedBox(width: 4),
                                         Container(
                                           height: 88,
