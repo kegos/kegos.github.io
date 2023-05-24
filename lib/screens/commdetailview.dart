@@ -24,6 +24,7 @@ import 'package:kakao_login_test/screens/mapscreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../common/commondata.dart';
+import 'component/basket.dart';
 
 class CommDetailViewScreen extends StatefulWidget {
   final int id;
@@ -213,6 +214,17 @@ class _CommDetailViewScreenState extends State<CommDetailViewScreen> {
     return response.data;
   }
 
+  void _addbasket() async {
+    addData(widget.id, 'C');
+    // basketList  = await getAllItems();
+    // print('==============');
+    // print(basketList[0].id);
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(
+        "관심 물건으로 추가됨")));
+  }
+
+
   final _formKey = GlobalKey<FormState>();
 
 
@@ -275,6 +287,12 @@ class _CommDetailViewScreenState extends State<CommDetailViewScreen> {
       appBar: AppBar(
         title: const Text('물건 상세보기'),
         actions: [
+          IconButton(
+            onPressed: () {
+              _addbasket();
+            },
+            icon: const Icon(Icons.shopping_cart),
+          ),
           IconButton(
             onPressed: () {
               _kakaoMsg();

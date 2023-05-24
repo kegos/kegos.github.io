@@ -63,11 +63,6 @@ class AssetCard extends StatelessWidget {
 
     _lat = rst['results'][0]['geometry']['location']['lat'];
     _lng = rst['results'][0]['geometry']['location']['lng'];
-    // print(response.data[0]['addr']);
-    // print ('========================================');
-    // print(_lat.toString());
-    // print('========================================');
-
 
     try {
       final response = await dio.post(
@@ -86,9 +81,7 @@ class AssetCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var f = NumberFormat('###,###,###,###');
-//    List<basketItems> basketList = [];
 
-//    updateLatLng();
 
     return Dismissible(
       // Each Dismissible must contain a Key. Keys allow Flutter to
