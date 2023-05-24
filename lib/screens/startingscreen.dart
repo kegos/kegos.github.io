@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:kakao_login_test/screens/commercialscreen.dart';
 import 'package:kakao_login_test/screens/component/bottom_menu.dart';
 import 'package:kakao_login_test/screens/homebasketlist.dart';
-import 'package:kakao_login_test/screens/main_screen.dart';
 import 'package:kakao_login_test/screens/mapscreen.dart';
 import 'package:kakao_login_test/screens/registrationscreen.dart';
 import 'package:kakao_login_test/screens/residentialscreen.dart';

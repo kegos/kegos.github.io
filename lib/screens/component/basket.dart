@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:kakao_login_test/status/controller.dart';
-import 'package:sqflite/sqflite.dart';
-
 import '../../common/commondata.dart';
 
 

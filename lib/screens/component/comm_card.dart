@@ -7,7 +7,6 @@ import 'package:kakao_login_test/screens/commdetailview.dart';
 import 'package:kakao_login_test/screens/component/basket.dart';
 
 import '../../common/commondata.dart';
-import '../assetdetailview.dart';
 
 
 class CommCard extends StatelessWidget {
@@ -158,8 +157,8 @@ class CommCard extends StatelessWidget {
 
                         dio.close();
                         Navigator.of(context).pop(true);
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(SnackBar(content: Text("$callname 거래 완료됨")));
+                        // ScaffoldMessenger.of(context)
+                        //     .showSnackBar(SnackBar(content: Text("$callname 거래 완료됨")));래
                       },
                       child: const Text("예")
                   ),

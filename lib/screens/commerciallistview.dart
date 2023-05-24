@@ -7,7 +7,6 @@ import 'package:kakao_login_test/screens/component/comm_card.dart';
 import 'package:kakao_login_test/screens/mapscreen.dart';
 import '../common/commondata.dart';
 import '../status/controller.dart';
-import 'component/asset_card.dart';
 
 
 class CommercialListViewScreen extends StatelessWidget {

@@ -1,12 +1,9 @@
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:kakao_login_test/screens/commdetailview.dart';
 import 'package:kakao_login_test/screens/component/basket.dart';
-
-import '../../common/commondata.dart';
 import '../assetdetailview.dart';
 
 

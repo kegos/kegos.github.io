@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:isolate';
+import 'dart:ui';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -13,6 +16,7 @@ import 'package:kakao_login_test/screens/commdetailview.dart';
 import 'package:kakao_login_test/screens/commupdate.dart';
 import 'package:kakao_login_test/screens/component/bottom_menu.dart';
 import 'package:kakao_login_test/screens/mapscreen.dart';
+import 'package:path_provider/path_provider.dart';
 import '../common/commondata.dart';
 import '../status/controller.dart';
 import 'dart:async';
@@ -25,7 +29,6 @@ import 'package:dio/src/form_data.dart';
 import 'package:kakao_flutter_sdk_talk/kakao_flutter_sdk_talk.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../common/commondata.dart';
 import 'component/basket.dart';
 
 int _id = 0;
@@ -35,9 +38,23 @@ class CommercialListViewScreenWeb extends StatefulWidget {
 
   @override
   State<CommercialListViewScreenWeb> createState() => _CommercialListViewScreenWebState();
+
+
 }
 
+
+
+
+
 class _CommercialListViewScreenWebState extends State<CommercialListViewScreenWeb> {
+
+
+  @override
+  void initState() {
+    super.initState();
+//    FlutterDownloader.registerCallback(downloadCallback as DownloadCallback);
+  }
+
 
 
   double _lat = 0.0;
@@ -70,6 +87,7 @@ class _CommercialListViewScreenWebState extends State<CommercialListViewScreenWe
         .showSnackBar(SnackBar(content: Text(
         "관심 물건으로 추가됨")));
   }
+
 
 
 
@@ -1304,34 +1322,51 @@ class _CommDetailState extends State<_CommDetail> {
                           crossAxisSpacing: 5.0,
                           childAspectRatio: 2/1.3,
                           padding: EdgeInsets.all(5.0),
-                          children: List.generate(
-                            9,
-                                (index) => DottedBorder(
+                          children: List.generate(9,
+                            (index) => DottedBorder(
                               color: Theme.of(context).colorScheme.primary,
                               strokeWidth: 1,
                               dashPattern: [5, 5],
-                              child: Container(
-                                decoration:
-                                index <= _pickedImgs.length -1
-                                    ? BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Theme.of(context).colorScheme.primaryContainer,
-                                  image: DecorationImage(
-                                    image: FileImage(File(_pickedImgs[index].path)),
-                                    fit: BoxFit.fitHeight,
-                                  ),
-                                ) :
-                                index <= _imgList.length -1
-                                    ? BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Theme.of(context).colorScheme.primaryContainer,
-                                  image: DecorationImage(
-                                    image: _imgList[index] == '' ? NetworkImage('$appServerURL/sample.jpg',) :  NetworkImage('$appServerURL/${_imgList[index]}',),
-                                    fit: BoxFit.fitHeight,
-                                  ),
-                                ) : null,
-                                child : Center(child: _boxContents[index]),
-
+                              child: GestureDetector(
+                                child: Container(
+                                  decoration:
+                                  index <= _pickedImgs.length -1
+                                      ? BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Theme.of(context).colorScheme.primaryContainer,
+                                    image: DecorationImage(
+                                      image: FileImage(File(_pickedImgs[index].path)),
+                                      fit: BoxFit.fitHeight,
+                                    ),
+                                  ) :
+                                  index <= _imgList.length -1
+                                      ? BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Theme.of(context).colorScheme.primaryContainer,
+                                    image: DecorationImage(
+                                      image: _imgList[index] == '' ? NetworkImage('$appServerURL/sample.jpg',) :  NetworkImage('$appServerURL/${_imgList[index]}',),
+                                      fit: BoxFit.fitHeight,
+                                    ),
+                                  ) : null,
+                                  child : Center(child: _boxContents[index]),
+                                ),
+                                // onTap: () async {
+                                //   String dir = (await getApplicationDocumentsDirectory()).path;
+                                //   try{
+                                //     await FlutterDownloader.enqueue(
+                                //       url: "${_imgList[index] == '' ? NetworkImage('$appServerURL/sample.jpg',) :  NetworkImage('$appServerURL/${_imgList[index]}',)}", 	// file url
+                                //       savedDir: '$dir/',	// 저장할 dir
+                                //       fileName: "${_imgList[index] == '' ? 'sample.jpg' :  _imgList[index]}",	// 파일명
+                                //       saveInPublicStorage: true ,	// 동일한 파일 있을 경우 덮어쓰기 없으면 오류발생함!
+                                //     );
+                                //
+                                //
+                                //     print("파일 다운로드 완료");
+                                //   }catch(e){
+                                //     print("eerror :::: $e");
+                                //   }
+                                //
+                                // },
                               ),
                             ),
                           ),

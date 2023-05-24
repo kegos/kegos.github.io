@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:dio/dio.dart';
@@ -8,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:kakao_login_test/model/asset_model.dart';
 import 'package:kakao_login_test/screens/assetdetailview.dart';
 import 'package:kakao_login_test/screens/commdetailview.dart';
 import 'package:kakao_login_test/screens/component/bottom_menu.dart';
@@ -26,6 +24,15 @@ List<dynamic> _result = [];
 String _type2 = 'C';
 bool _isloading = false;
 
+Future<List> pagenationMapData() async {
+  LocationPermission permission = await Geolocator.requestPermission();
+  Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.best);
+
+  _lat = position.latitude;
+  _lng = position.longitude;
+  return [];
+}
 
 
 late GoogleMapController _mapController;
@@ -39,7 +46,6 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-
   Map<String, String> formData = {};
   final _searchController = TextEditingController();
   String _floor = '0';
@@ -50,21 +56,13 @@ class _MapScreenState extends State<MapScreen> {
   final _salesprice = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  Future<List> pagenationMapData() async {
-    LocationPermission permission = await Geolocator.requestPermission();
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.best);
-
-    _lat = position.latitude;
-    _lng = position.longitude;
-    print(setNum);
-  return [];
-  }
-
   @override
   Widget build(BuildContext context) {
-
- if(kIsWeb)
+  if(setNum == 0 ) {
+    pagenationMapData();
+    setNum++;
+  }
+  if(kIsWeb)
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SingleChildScrollView(
@@ -202,17 +200,14 @@ class _MapScreenState extends State<MapScreen> {
                                                           'uuid': _result[index]['id'],
                                                         }
                                                     );
-
-
-
                                                   } catch (e) {
                                                     print(e);
                                                   }
 
                                                   dio.close();
                                                   Navigator.of(context).pop(true);
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(SnackBar(content: Text("$_result[index]['callname'] 거래 완료됨")));
+                                                  // ScaffoldMessenger.of(context)
+                                                  //     .showSnackBar(SnackBar(content: Text("$_result[index]['callname'] 거래 완료됨")));
                                                 },
                                                 child: const Text("예")
                                             ),
@@ -605,7 +600,6 @@ class _MapScreenState extends State<MapScreen> {
               height: 70,
               child: ElevatedButton(
                   onPressed: (){
-                    const CircularNotchedRectangle();
                     if(_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       _type2 = _type;
@@ -892,12 +886,6 @@ class _MapScreenState extends State<MapScreen> {
 
     final dio = Dio();
 
-    LocationPermission permission = await Geolocator.requestPermission();
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.best);
-
-    _lat = position.latitude;
-    _lng = position.longitude;
 
     final response = await dio.post('$appServerURL/mapselected', data: {
       'gubun': _type,
@@ -906,7 +894,7 @@ class _MapScreenState extends State<MapScreen> {
       'price': _salesprice,
       'deposit': _deposit,
       'monthly': _monthly,
-      'callname': _searchtxt,
+      'callname': _searchtxt ?? '',
     });
 
     if (response.data.length > 0) {

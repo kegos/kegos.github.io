@@ -11,13 +11,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kakao_login_test/screens/assetupdate.dart';
 import 'package:kakao_login_test/screens/component/bottom_menu.dart';
 import 'package:kakao_flutter_sdk_share/kakao_flutter_sdk_share.dart';
 import 'package:kakao_flutter_sdk_talk/kakao_flutter_sdk_talk.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:kakao_login_test/screens/main_screen.dart';
 import 'package:kakao_login_test/screens/mapscreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 

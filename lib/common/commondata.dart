@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:kakao_login_test/screens/component/basket.dart';
 
 const appServerURL = "https://www.smilersa.com:8080";
 const fileServerURL = "http://www.smilersa.com:3000";
