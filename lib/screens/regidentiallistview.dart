@@ -123,7 +123,7 @@ class RegidentialListViewScreen extends StatelessWidget {
                                   price2: snapshot.data[index]['price2'] ?? 0,
                                   room: snapshot.data[index]['room'] ?? 0,
                                   bath: snapshot.data[index]['bath'] ?? 0,
-                                  size: snapshot.data[index]['size'] ?? 0,
+                                  size: snapshot.data[index]['size'].round() ?? 0,
                                   direction: snapshot.data[index]['direction'],
                                   indate: snapshot.data[index]['indate'],
                                   floor: snapshot.data[index]['floor'] ?? 0,

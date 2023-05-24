@@ -248,8 +248,6 @@ class _AssetDetailViewScreenState extends State<AssetDetailViewScreen> {
 
 
 
-
-
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
