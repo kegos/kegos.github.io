@@ -407,14 +407,14 @@ class _ResidentialScreenState extends State<ResidentialScreen> {
                                       controller.maxJeonse(controller.maxJ.value.toInt());
                                     } else if(index == 1) {
                                       _textEditingControllerMinJ.text = '0';
-                                      _textEditingControllerMaxJ.text = f.format(((index * 5000)*1.5).round());
+                                      _textEditingControllerMaxJ.text = f.format(((index * 3000)*1.5).round());
                                       controller.minJeonse(1);
-                                      controller.maxJeonse(((index * 5000)*1.5).round());
+                                      controller.maxJeonse(((index * 3000)*1.5).round());
                                     } else {
-                                      _textEditingControllerMinJ.text = f.format((((index) * 5000)*0.7).round());
-                                      _textEditingControllerMaxJ.text = f.format((((index) * 5000)*1.3).round());
-                                      controller.minJeonse(((index * 5000)*0.7).round());
-                                      controller.maxJeonse(((index * 5000)*1.3).round());
+                                      _textEditingControllerMinJ.text = f.format((((index) * 3000)*0.8).round());
+                                      _textEditingControllerMaxJ.text = f.format((((index) * 3000)*1.2).round());
+                                      controller.minJeonse(((index * 3000)*0.8).round());
+                                      controller.maxJeonse(((index * 3000)*1.2).round());
                                     }
                                   },
                                   children: _listJ,
@@ -944,7 +944,7 @@ class _ResidentialScreenState extends State<ResidentialScreen> {
     controller.minSize(controller.minZ.value.toInt());
     controller.maxSize(controller.maxZ.value.toInt());
     _list.addAll(List.generate((controller.maxS.value.toInt()/5000).toInt(), (i) => ((i + 1) * 5000)).map((e) => Text('${f.format(e)}만원')).toList());
-    _listJ.addAll(List.generate((controller.maxJ.value.toInt()/5000).toInt(), (i) => ((i + 1) * 5000)).map((e) => Text('${f.format(e)}만원')).toList());
+    _listJ.addAll(List.generate((controller.maxJ.value.toInt()/3000).toInt(), (i) => ((i + 1) * 3000)).map((e) => Text('${f.format(e)}만원')).toList());
     _listD.addAll(List.generate((controller.maxD.value.toInt()/500).toInt(), (i) => ((i + 1) * 500)).map((e) => Text('${f.format(e)}만원')).toList());
     _listM.addAll(List.generate((controller.maxM.value.toInt()/10).toInt(), (i) => ((i + 1) * 10)).map((e) => Text('${f.format(e)}만원')).toList());
     _listSize.addAll(List.generate(((controller.maxZ.value.toInt()*0.3025)/5).toInt(), (i) => ((i + 1) * 5)).map((e) => Text('${f.format(e)}평')).toList());

@@ -72,12 +72,24 @@ class _CommercialListViewScreenWebState extends State<CommercialListViewScreenWe
 
 
 
-  static void downloadCallback(
-      String id, DownloadTaskStatus status, int progress) {
-    print('Background Isolate Callback: task ($id) is in status ($status) and process ($progress)');
-    final SendPort send = IsolateNameServer.lookupPortByName('downloader_send_port')!;
-    send.send([id, status, progress]);
+  void _addbasket() async {
+    if(_id == 0) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(
+          "선택된 물건이 없습니다.")));
+      return;
+    }
+    addData(_id, 'C');
+    // basketList  = await getAllItems();
+    // print('==============');
+    // print(basketList[0].id);
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(
+        "관심 물건으로 추가됨")));
   }
+
+
+
 
 
 
@@ -143,6 +155,13 @@ class _CommercialListViewScreenWebState extends State<CommercialListViewScreenWe
       appBar: AppBar(
         title: const Text('상업용 부동산'),
         actions: [
+          IconButton(
+            onPressed: () {
+              _addbasket();
+            },
+            icon: const Icon(Icons.shopping_cart),
+          ),
+
           IconButton(
             onPressed: () {
               getx.Get.to(() => const MapScreen());
@@ -728,6 +747,8 @@ class _CommDetailState extends State<_CommDetail> {
       });
     }
   }
+
+
 
   Widget _SubTitle(String title) {
     return Container(

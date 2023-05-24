@@ -20,6 +20,7 @@ import 'package:kakao_login_test/screens/mapscreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../common/commondata.dart';
+import 'component/basket.dart';
 
 
 class AssetDetailViewScreen extends StatefulWidget {
@@ -57,6 +58,24 @@ class _AssetDetailViewScreenState extends State<AssetDetailViewScreen> {
     _lng = double.parse(response.data[0]['lng'].toString());
     return response.data;
   }
+
+
+  void _addbasket() async {
+    if(widget.id == 0) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(
+          "선택된 물건이 없습니다.")));
+      return;
+    }
+    addData(widget.id, 'H');
+    // basketList  = await getAllItems();
+    // print('==============');
+    // print(basketList[0].id);
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(
+        "관심 물건으로 추가됨")));
+  }
+
 
 
 
@@ -236,6 +255,12 @@ class _AssetDetailViewScreenState extends State<AssetDetailViewScreen> {
         appBar: AppBar(
           title: const Text('주거 상세보기'),
           actions: [
+            IconButton(
+              onPressed: () {
+                _addbasket();
+              },
+              icon: const Icon(Icons.shopping_cart),
+            ),
             IconButton(
               onPressed: () {
                 _kakaoMsg();
